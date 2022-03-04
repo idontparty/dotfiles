@@ -1,0 +1,23 @@
+---
+metadata:
+  distro: "arch" # Including derivatives.
+  version: 0.1
+  basepath: "$HOME/"
+
+
+# Assuming basepaths are prepended to dst.
+dotfiles:
+  -
+    name: "gitconfig"
+    src: "lib/gitconfig"
+    dst: ".gitconfig"
+  -
+    name: "zshrc"
+    src: "lib/zshrc"
+    dst: ".zshrc"
+  -
+    name: "tmux.conf"
+    src: "lib/tmux.conf"
+    dst: ".tmux.conf"
+ 
+...
