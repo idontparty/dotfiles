@@ -3,6 +3,7 @@
 import argparse
 import io
 import os
+import subprocess
 import yaml
 
 class Installer:
@@ -16,15 +17,21 @@ class Installer:
 
         self.success_dotfiles = 0
         self.unsuccessful_dotfiles = 0
-        
+        self.num_aur_packages = 0
 
+
+    # TODO: refactor counter functions, add variable for each counter.
     def add_unsuccessful_dotfile(self):
         """Increment unsuccessful dotfiles by 1."""
         self.unsuccessful_dotfiles += 1
-    
+
     def add_successful_dotfile(self):
         """Increment succesful dotfiles by 1."""
         self.success_dotfiles += 1
+
+    def add_aur_package(self):
+        """Increment requested aur package count by 1."""
+        self.num_aur_packages += 1
 
 
 def main(args):
@@ -33,10 +40,16 @@ def main(args):
     entries = yaml.load(file, Loader=yaml.FullLoader)
     installer = print_metadata(entries)
 
-    # Move dotfiles
+    # Install dotfiles.
     install_dotfiles(installer, entries)
 
-    # Print status update - keep track in installer object?
+    # Install aur package.
+    install_os_packages(installer, entries)
+
+    # Install official arch packages.
+    # Print status update.
+    print_summary(installer)
+
 
     return
 
@@ -49,7 +62,8 @@ def install_dotfiles(installer, entries):
         name = file.get("name")
         src = installer.tt_path + file.get("src")
         dst = installer.basepath + file.get("dst")
-        
+
+        # TODO: Check if path exist, otherwise create relevant parent paths.
         if os.path.isfile(dst):
             # Check if symlinked already. If so, ignore.
             if os.path.islink(dst):
@@ -70,7 +84,6 @@ def install_dotfiles(installer, entries):
         print(f"\t* Installing dotfile {name}.")
         os.symlink(src, dst)
         installer.add_successful_dotfile()
-    print_summary(installer)
     return
 
 def print_metadata(entries):
@@ -110,6 +123,7 @@ def print_metadata(entries):
     return Installer(basepath, distro, version)
 
 def print_summary(installer):
+    """Printing stats about Toxic Tissue."""
     print("""
 ##################################
 ######### Toxic (T)issue #########
@@ -118,19 +132,49 @@ def print_summary(installer):
 ##################################
 # Installed {} dotfiles.          #
 # Unable to install {} dotfiles.  #
+# {} AUR packages not installed.  #
 ##################################
 # Cheeeeeeeeeeeeeeeeeerioooooooo #
 ##################################
-    """.format(installer.success_dotfiles, installer.unsuccessful_dotfiles))
-'''
-def install_os_packages(installer):
+    """.format(installer.success_dotfiles,
+    installer.unsuccessful_dotfiles,
+    installer.num_aur_packages))
+
+def install_os_packages(installer,entries):
     """Installing packages based on distro."""
     # Check if debian or arch
+    print(f"[*] Installing packages for {installer.distro}...")
     if "arch" in installer.distro:
+        dump_pacman_packages(installer, entries)
+        dump_aur_packages(installer, entries)
+
         # Go with pacman
         # Dump package names
-        # Install 
-'''
+        # Install
+
+def dump_aur_packages(installer, entries):
+    """Dump all aur packages.
+    Currently not automated installation for sec reasons."""
+
+    # Default
+    files = entries.get("aur_packages")
+    print("\t[!] AUR downloads have not been implemented for security purposes.")
+    print("\t\tInstead, here are the links to AUR - verify the install files yourself.")
+    for file in files:
+        print(f"\t\t\t- https://aur.archlinux.org/packages/{file}")
+        installer.add_aur_package()
+
+
+def dump_pacman_packages(installer, entries):
+    """Install pacman packages."""
+    files = entries.get("pacman_packages")
+    print("\t[*] Installing packages through pacman.")
+    for file in files:
+        execs = f"sudo pacman -S --needed {file}"
+        subprocess.run(execs.split(' '))
+        # TODO: Check if installs successfully
+
+
 
 def arg_parser():
     """arg_parser parse the args provided by the user."""
