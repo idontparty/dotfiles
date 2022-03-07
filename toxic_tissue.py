@@ -109,7 +109,6 @@ def print_metadata(entries):
     print("[*] We shot the cyberbirds... Mourning is over.\n")
     return Installer(basepath, distro, version)
 
-
 def print_summary(installer):
     print("""
 ##################################

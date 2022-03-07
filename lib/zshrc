@@ -113,5 +113,6 @@ alias ll="ls -llh"
 alias tnew="tmux new -s"
 alias ta="tmux attach -t"
 alias tls="tmux ls"
+alias vim=nvim
 
 
