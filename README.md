@@ -1,6 +1,8 @@
-# dotfiles
-Personal dotfiles
+# Toxic Tissue
 
+Just me playing around with creative ways of installing dotfiles and doing host management.
+- Currently focused around Arch based distros, in particular Endeavour OS. Support for other distros should not be too hard to implement though..
 
-Currently working on a modular design: List of dotfiles in a lib structure, along with checked in config file of which files belong where.
-- Idea is you can have one config file for each system that is different.
+## How to do this
+1. Install `oh-my-zsh` if relevant. (optional).
+2. `bash install.sh` - this installs all the dotfiles and main repo packages.

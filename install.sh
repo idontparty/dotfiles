@@ -1,16 +1,22 @@
 #!/bin/bash
 
-# If arch or debian based check with uname
+# Create virtualenv named 'venv'.
+python3 -m venv venv 
 
-# TODO: Install software packages, including python+pip
-# Setup venv for yaml.
+# Activate python virtualenv.
+source 'venv/bin/activate'
 
-# Install plugins, themes, and extensions
+# Install pip on Arch linux
+sudo pacman -S python-pip
 
-# Git config
+# Install pip packages (needed for toxic tissue).
+pip install -r requirements.txt
 
-# Symlink dotfiles
+# TODO: Add support for downloading oh-my-zsh first.
 
-# Create functions along the way
+# Run toxic tissue.
+python toxic_tissue.py -f arch.yaml
+
+# TODO: Add support for other OSs.
 
 
