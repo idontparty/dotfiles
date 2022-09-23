@@ -15,10 +15,10 @@ echo '[!] Installing packages. Requires sudo privs.'
 # Install basic toolkit
 if [[ "$DISTRO" == "ARCH" ]]; then
   sudo pacman -Syu
-  sudo pacman -S "$CORE_DEV noto-fonts-emoji"
+  sudo pacman -S $CORE_DEV noto-fonts-emoji
 elif [[ "$DISTRO" == "DEB" ]]; then
   sudo apt update && sudo apt upgrade
-  sudo apt install "$CORE_DEV fonts-powerline"
+  sudo apt install $CORE_DEV fonts-powerline
 fi
 
 # Oh my zsh from github
@@ -54,7 +54,7 @@ LIBDIR="$PWD/lib/"
 ln -sf "$LIBDIR/gitconfig" "$HOME/.gitconfig"
 # Konsole colorscheme
 KONSOLE_COLORSCHEME_DIR="$HOME/.local/share/konsole"
-mkdir -p $KONSOLE_COLORSCHEME_DIR
+mkdir -p "$KONSOLE_COLORSCHEME_DIR"
 ln -sf "$LIBDIR/Nordic.colorscheme" "$KONSOLE_COLORSCHEME_DIR/Nordic.colorscheme"
 # Konsole config
 KONSOLE_RC_DIR="$HOME/.config"
