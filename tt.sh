@@ -43,7 +43,7 @@ bash "$OMZPATH"
 # Tmux Plugin manager from github.
 echo '[!] Installing Tmux Plugin Manager (TPM).'
 echo '[+] Source code available at https://github.com/tmux-plugins/tpm.'
-git clone 'https://github.com/tmux-plugins/tpm' '~/.tmux/plugins/tpm'
+git clone 'https://github.com/tmux-plugins/tpm' "$HOME/.tmux/plugins/tpm"
 
 
 # Linking dotfiles.
