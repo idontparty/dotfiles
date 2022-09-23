@@ -14,6 +14,7 @@ CORE_DEV="konsole neovim zsh tmux powerline"
 echo '[!] Installing packages. Requires sudo privs.'
 # Install basic toolkit
 if [[ "$DISTRO" == "ARCH" ]]; then
+  sudo pacman -Syu
   sudo pacman -S "$CORE_DEV" "noto-fonts-emoji"
 elif [[ "$DISTRO" == "DEB" ]]; then
   sudo apt update && sudo apt upgrade
