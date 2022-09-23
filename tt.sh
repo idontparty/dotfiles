@@ -15,7 +15,7 @@ echo '[!] Installing packages. Requires sudo privs.'
 # Install basic toolkit
 if [ "$DISTRO" == "ARCH" ]; then
   sudo pacman -S "$CORE_DEV" "noto-fonts-emoji"
-elif [ "$DISTRO" == "DEB"]
+elif [ "$DISTRO" == "DEB"]; then
   sudo apt update && sudo apt upgrade
   sudo apt install "$CORE_DEV" "fonts-powerline"
 fi
