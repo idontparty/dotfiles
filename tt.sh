@@ -15,10 +15,10 @@ echo '[!] Installing packages. Requires sudo privs.'
 # Install basic toolkit
 if [[ "$DISTRO" == "ARCH" ]]; then
   sudo pacman -Syu
-  sudo pacman -S "$CORE_DEV" "noto-fonts-emoji"
+  sudo pacman -S "$CORE_DEV noto-fonts-emoji"
 elif [[ "$DISTRO" == "DEB" ]]; then
   sudo apt update && sudo apt upgrade
-  sudo apt install "$CORE_DEV" "fonts-powerline"
+  sudo apt install "$CORE_DEV fonts-powerline"
 fi
 
 # Oh my zsh from github
@@ -27,6 +27,9 @@ OMZPATH='/tmp/ohmyzsh.sh'
 echo '[!] Downloading ohmyzsh. Do you want to read through source? [yn]'
 wget -O "$OMZPATH" 'https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh'
 
+# Add exit statement to ohmyzsh installer. Easier to continue script.
+echo exit >> /tmp/ohmyzsh.sh
+
 while true; do
     read -p "[?] Do you want to read through the source code? [Yn]" yn
     case "$yn" in
@@ -34,9 +37,10 @@ while true; do
         * ) less "$OMZPATH"; break;;
     esac
 done
+
 bash "$OMZPATH"
 
-# Tmux Plugin manager from github
+# Tmux Plugin manager from github.
 echo '[!] Installing Tmux Plugin Manager (TPM).'
 echo '[+] Source code available at https://github.com/tmux-plugins/tpm.'
 git clone 'https://github.com/tmux-plugins/tpm' '~/.tmux/plugins/tpm'
