@@ -1,0 +1,5 @@
+# Ignore python venv files.
+venv/
+
+# Ignore vscode config.
+.vscode/
