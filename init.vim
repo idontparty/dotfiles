@@ -6,5 +6,11 @@ set termguicolors
 " Set line number
 set number
 
-" Use shared clipboard.
+" Set syntax
+set syntax
+
+" Use shared clipboard
 set clipboard+=unnamedplus
+
+" Copy with mouse to shared clipboard
+set mouse=r
