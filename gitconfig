@@ -1,3 +1,6 @@
 [user]
 	name = Steffen Johansen
 	email = idontparty@users.noreply.github.com
+
+[includeIf "gitdir:~/workspace/ftq/"]
+  path = ~/workspace/ftq/.gitconfig
